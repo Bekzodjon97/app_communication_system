@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import uz.pdp.app_communication_company.entity.Employer;
 import uz.pdp.app_communication_company.payload.ApiResponse;
 import uz.pdp.app_communication_company.payload.LoginDto;
+import uz.pdp.app_communication_company.repository.EmployerRepository;
+import uz.pdp.app_communication_company.repository.SimCardRepository;
 import uz.pdp.app_communication_company.security.JwtProvider;
 
 @Service
@@ -21,17 +23,21 @@ public class AuthService implements UserDetailsService {
 
     @Autowired
     JwtProvider jwtProvider;
+    @Autowired
+    EmployerRepository employerRepository;
+    @Autowired
+    SimCardRepository simCardRepository;
 
 
 
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return null;
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return employerRepository.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException(username+" topilmadi"));
     }
 
-    public UserDetails loadUserByUsernameFromCard(String username) {
-        return null;
+    public UserDetails loadUserByUsernameFromCard(String simCardCode) {
+        return simCardRepository.findBySimCardCode(simCardCode).orElseThrow(() -> new UsernameNotFoundException("SimCard topilmadi"));
     }
 
     public ApiResponse login(LoginDto loginDto) {

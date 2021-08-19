@@ -21,7 +21,7 @@ public class Payment {
     private Date date;
 
     @ManyToOne(optional = false)
-    private Client client;
+    private SimCard simCard;
 
     private double paymentAmount;
 

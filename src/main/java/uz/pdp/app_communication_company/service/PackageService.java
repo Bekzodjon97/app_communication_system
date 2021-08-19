@@ -88,7 +88,7 @@ public class PackageService {
             simCardRepository.save(simCardInSystem);
             Payment payment=new Payment();
             payment.setPaymentAmount(optionalPackages.get().getPackagePrice());
-            payment.setClient(simCardInSystem.getClient());
+            payment.setSimCard(simCardInSystem);
             payment.setDate(new Date());
             payment.setWhatFor(simCardInSystem.getUsername()+" dan "+optionalPackages.get().getName()+" paketi uchun to'lov");
             paymentRepository.save(payment);

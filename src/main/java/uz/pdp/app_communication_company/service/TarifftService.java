@@ -63,7 +63,7 @@ public class TarifftService {
             simCardRepository.save(simCardInSystem);
             Payment payment=new Payment();
             payment.setPaymentAmount(optionalTariff.get().getPrice());
-            payment.setClient(simCardInSystem.getClient());
+            payment.setSimCard(simCardInSystem);
             payment.setDate(new Date());
             payment.setWhatFor(simCardInSystem.getUsername()+" dan "+optionalTariff.get().getName()+" tarifi uchun oylik to'lov");
             paymentRepository.save(payment);
